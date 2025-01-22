@@ -26,6 +26,6 @@ app.get('/health', (req, res) => {
 
 const server = https.createServer(options, app);
 
-server.listen(3443, () => {
+server.listen(3443, '0.0.0.0', () => {
     console.log('HTTPS Server running on port 3443');
 });
