@@ -9,7 +9,6 @@ const options = {
     cert: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/fullchain.pem')
 };
 
-// CORS middleware configuration
 app.use(cors({
     origin: 'https://spainymatrix.xyz',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -18,6 +17,15 @@ app.use(cors({
 
 app.use(express.json());
 
+// Root endpoint
+app.get('/', (req, res) => {
+    res.status(200).json({
+      status: 'success',
+      message: 'Node service root endpoint'
+    });
+});
+
+// Heartbeat endpoint
 app.get('/api/heartbeatstatus', (req, res) => {
     res.status(200).json({
       status: 'success',
