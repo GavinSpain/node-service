@@ -1,5 +1,6 @@
 const https = require('https');
 const express = require('express');
+const cors = require('cors');
 const fs = require('fs');
 const app = express();
 
@@ -8,20 +9,20 @@ const options = {
     cert: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/fullchain.pem')
 };
 
-// Middleware to parse JSON requests
+// CORS middleware configuration
+app.use(cors({
+    origin: 'https://spainymatrix.xyz',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
-// Define routes
-app.get('/', (req, res) => {
+app.get('/api/heartbeatstatus', (req, res) => {
     res.status(200).json({
       status: 'success',
-      message: 'Node service is running!'
+      message: 'Service is healthy'
     });
-});
-
-// Health check endpoint
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'healthy' });
 });
 
 const server = https.createServer(options, app);
