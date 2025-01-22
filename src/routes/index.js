@@ -1,6 +1,5 @@
 function setupRoutes(app) {
     app.get('/api/heartbeatstatus', (req, res) => {
-
         console.log('--------------------');
         console.log('Incoming request at:', new Date().toISOString());
         console.log('Request headers:', req.headers);
@@ -22,7 +21,6 @@ function setupRoutes(app) {
         console.log('Sending response:', heartbeatData);
         res.json(heartbeatData);
     });
-
 
     // Add error handling middleware
     app.use((err, req, res, next) => {
