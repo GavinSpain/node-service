@@ -4,9 +4,8 @@
   "description": "A basic Node.js service with HTTPS endpoint",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js"
-  },
-  "dependencies": {
+    "start": "node src/server.js"
+  },  "dependencies": {
     "express": "^4.17.1",
     "dotenv": "^10.0.0",
     "https": "^1.0.0"
