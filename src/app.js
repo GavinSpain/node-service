@@ -7,7 +7,7 @@ const routes = require('./routes/index');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 3443;
 
 // Middleware to parse JSON requests
 app.use(express.json());

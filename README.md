@@ -39,7 +39,7 @@ node-service
 3. Create a `.env` file in the root directory and add the following environment variables:
 
    ```
-   PORT=443
+   PORT=3443
    SSL_KEY_PATH=/path/to/your/ssl/key.pem
    SSL_CERT_PATH=/path/to/your/ssl/cert.pem
    ```
