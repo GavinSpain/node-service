@@ -1,20 +1,27 @@
-const https = require('https');
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const app = express();
 
-const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/fullchain.pem')
-};
+const allowedOrigins = [
+    'https://spainymatrix.xyz',
+    'https://www.spainymatrix.xyz',
+    'http://localhost',
+    'http://localhost:3001'
+];
 
 app.use(cors({
-    origin: 'https://spainymatrix.xyz',
+
+    origin: function(origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
+}));
 app.use(express.json());
 
 // Root endpoint
@@ -33,8 +40,7 @@ app.get('/api/heartbeatstatus', (req, res) => {
     });
 });
 
-const server = https.createServer(options, app);
-
-server.listen(3443, '0.0.0.0', () => {
-    console.log('HTTPS Server running on port 3443');
+const port = 3000;
+app.listen(port, '0.0.0.0', () => {
+    console.log(`HTTP Server running on port ${port}`);
 });
