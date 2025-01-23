@@ -1,13 +1,6 @@
-const https = require('https');
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs');
 const app = express();
-
-const options = {
-    key: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/www.spainymatrix.xyz/fullchain.pem')
-};
 
 app.use(cors({
     origin: 'https://spainymatrix.xyz',
@@ -32,9 +25,7 @@ app.get('/api/heartbeatstatus', (req, res) => {
       message: 'Service is healthy'
     });
 });
-
-const server = https.createServer(options, app);
-
-server.listen(3443, '0.0.0.0', () => {
-    console.log('HTTPS Server running on port 3443');
+    const port = 3001;
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`HTTP Server running on port ${port}`);
 });
