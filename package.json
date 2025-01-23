@@ -1,17 +1,12 @@
 {
   "name": "node-service",
   "version": "1.0.0",
-  "description": "A basic Node.js service with HTTPS endpoint",
-  "main": "src/app.js",
+  "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js"
-  },  "dependencies": {
+  },
+  "dependencies": {
     "express": "^4.17.1",
-    "dotenv": "^10.0.0",
-    "https": "^1.0.0"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "license": "MIT"
+    "cors": "^2.8.5"
+  }
 }
