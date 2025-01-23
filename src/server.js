@@ -39,6 +39,9 @@ app.get('/api/heartbeatstatus', (req, res) => {
       message: 'Service is healthy'
     });
 });
+    const port = 3001;
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`HTTP Server running on port ${port}`);
 
 const port = 3000;
 app.listen(port, '0.0.0.0', () => {
