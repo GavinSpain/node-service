@@ -24,12 +24,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-      status: 'success',
-      message: 'Node service root endpoint'
-    });
-});
+
 
 
 app.get('/api/heartbeatstatus', (req, res) => {
