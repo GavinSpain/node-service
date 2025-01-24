@@ -1,6 +1,6 @@
-# Node.js HTTPS Service
+# Node Heartbeat Service
 
-This project is a basic Node.js service that exposes a single HTTPS endpoint. It is intended for deployment on an EC2 server with an Nginx web server.
+Simple service providing heartbeat status monitoring.
 
 ## Project Structure
 
@@ -17,16 +17,14 @@ node-service
 
 ## Prerequisites
 
-- Node.js (version 14 or higher)
+- Node.js (version 18 or higher)
 - npm (Node Package Manager)
-- OpenSSL (for generating SSL certificates)
 
 ## Installation
 
-1. Clone the repository:
+1. Navigate to the project directory:
 
-   ```
-   git clone <repository-url>
+   ```bash
    cd node-service
    ```
 
