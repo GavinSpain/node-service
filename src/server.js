@@ -25,7 +25,50 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// In-memory storage for transactions
+const transactions = [];
 
+// POST endpoint for transactions
+app.post('/api/transactions', (req, res) => {
+    console.log('--------------------');
+    console.log('Incoming request at:', new Date().toISOString());
+    console.log('Request headers:', req.headers);
+    console.log('Client IP:', req.ip);
+    console.log('Request URL:', req.originalUrl);
+
+    const { transactions: newTransactions } = req.body;
+    
+    if (!Array.isArray(newTransactions)) {
+        return res.status(400).json({ error: 'Invalid request format' });
+    }
+
+    const processedTransactions = newTransactions.map(tx => ({
+        ...tx,
+        id: uuidv4(),
+        created_at: new Date().toISOString()
+    }));
+
+    transactions.push(...processedTransactions);
+    
+    console.log('Sending response:', processedTransactions);
+    res.status(201).json(processedTransactions);
+});
+
+// GET endpoint for transactions
+app.get('/api/transactions', (req, res) => {
+    console.log('--------------------');
+    console.log('Incoming request at:', new Date().toISOString());
+    console.log('Request headers:', req.headers);
+    console.log('Client IP:', req.ip);
+    console.log('Request URL:', req.originalUrl);
+
+    const sortedTransactions = [...transactions].sort(
+        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+    
+    console.log('Sending response:', sortedTransactions);
+    res.json(sortedTransactions);
+});
 
 
 app.get('/api/heartbeatstatus', (req, res) => {
