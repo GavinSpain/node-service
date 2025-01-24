@@ -1,5 +1,5 @@
 {
-  "name": "db_interface",
+  "name": "node_service",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
