@@ -1,7 +1,7 @@
 {
   "name": "node_service",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple node service with heartbeat status endpoint",
   "main": "src/server.ts",
   "scripts": {
     "start": "ts-node src/server.ts",
@@ -19,17 +19,5 @@
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
-  },
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  }
 }
