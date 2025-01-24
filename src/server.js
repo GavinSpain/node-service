@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
     });
 });
 
+
 app.get('/api/heartbeatstatus', (req, res) => {
     res.status(200).json({
       status: 'success',
