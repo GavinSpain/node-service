@@ -33,10 +33,23 @@ app.get('/', (req, res) => {
 
 
 app.get('/api/heartbeatstatus', (req, res) => {
-    res.status(200).json({
-      status: 'success',
-      message: 'Service is healthy'
-    });
+    console.log('--------------------');
+    console.log('Incoming request at:', new Date().toISOString());
+    console.log('Request headers:', req.headers);
+    console.log('Client IP:', req.ip);
+    console.log('Request URL:', req.originalUrl);
+    
+    const heartbeatData = [];
+    
+    for (let i = 1; i <= 5; i++) {
+        heartbeatData.push({ 
+            service_id: i,
+            seconds_since_last: Math.floor(Math.random() * 30)
+        });
+    }
+    
+    console.log('Sending response:', heartbeatData);
+    res.json(heartbeatData);
 });
 
 const port = 3001;

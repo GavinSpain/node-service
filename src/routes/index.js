@@ -12,7 +12,7 @@ function setupRoutes(app) {
         const heartbeatData = [];
         
         for (let i = 1; i <= 5; i++) {
-            heartbeatData.push({
+            heartbeatData.push({ 
                 service_id: i,
                 seconds_since_last: Math.floor(Math.random() * 30)
             });
