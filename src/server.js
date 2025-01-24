@@ -43,6 +43,10 @@ app.get('/api/heartbeatstatus', (req, res) => {
         });
     }
     
+    const response = {
+      heartbeats: heartbeatData
+    };
+
     console.log('Sending response:', heartbeatData);
     res.json(heartbeatData);
 });
