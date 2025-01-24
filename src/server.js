@@ -44,11 +44,11 @@ app.get('/api/heartbeatstatus', (req, res) => {
     }
     
     const response = {
-      heartbeats: heartbeatData
+        heartbeats: heartbeatData
     };
 
-    console.log('Sending response:', heartbeatData);
-    res.json(heartbeatData);
+    console.log('Sending response:', response);
+    res.json(response);  // Send response object instead of heartbeatData
 });
 
 const port = process.env.PORT || 3001;
