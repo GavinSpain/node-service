@@ -7,7 +7,8 @@ Simple service providing heartbeat status monitoring.
 ```
 node-service
 ├── src
-│   ├── app.js          # Entry point of the application
+│   ├── app.js          # Application setup and middleware
+│   ├── server.js       # Server entry point
 │   └── routes
 │       └── index.js    # Route definitions
 ├── package.json        # npm configuration file
@@ -37,10 +38,8 @@ node-service
 3. Create a `.env` file in the root directory and add the following environment variables:
 
    ```
-   PORT=3443
-   SSL_KEY_PATH=/path/to/your/ssl/key.pem
-   SSL_CERT_PATH=/path/to/your/ssl/cert.pem
-   ```
+   PORT=3001
+
 
    Replace `/path/to/your/ssl/key.pem` and `/path/to/your/ssl/cert.pem` with the actual paths to your SSL certificate files.
 
