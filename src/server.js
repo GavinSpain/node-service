@@ -51,7 +51,7 @@ app.post('/api/transactions', (req, res) => {
 
     transactions.push(...processedTransactions);
     
-    console.log('Sending response:', processedTransactions);
+    console.log('Sending response :', processedTransactions);
     res.status(201).json(processedTransactions);
 });
 
