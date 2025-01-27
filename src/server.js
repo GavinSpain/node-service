@@ -55,13 +55,13 @@ app.post('/api/transactions', (req, res) => {
     res.status(201).json(processedTransactions);
 });
 
-// GET endpoint for transactions
 app.get('/api/heartbeatstatus', (req, res) => {
     console.log('--------------------');
     console.log('Incoming request at:', new Date().toISOString());
     console.log('Request headers:', req.headers);
     console.log('Client IP:', req.ip);
     console.log('Request URL:', req.originalUrl);
+    console.log('Current heartbeats size:', heartbeats.size); // Debug line
     
     const heartbeatData = Array.from(heartbeats.values()).map(hb => ({
         service_id: hb.service_id,
