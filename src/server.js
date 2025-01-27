@@ -61,7 +61,7 @@ app.get('/api/heartbeatstatus', (req, res) => {
     console.log('Request headers:', req.headers);
     console.log('Client IP:', req.ip);
     console.log('Request URL:', req.originalUrl);
-    console.log('Current heartbeats size:', heartbeats.size); // Debug line
+    console.log('Current heartbeats size:', heartbeats.size);
     
     const heartbeatData = Array.from(heartbeats.values()).map(hb => ({
         service_id: hb.service_id,
@@ -76,31 +76,6 @@ app.get('/api/heartbeatstatus', (req, res) => {
     res.json(response);
 });
 
-
-app.get('/api/heartbeatstatus', (req, res) => {
-    console.log('--------------------');
-    console.log('Incoming request at:', new Date().toISOString());
-    console.log('Request headers:', req.headers);
-    console.log('Client IP:', req.ip);
-    console.log('Request URL:', req.originalUrl);
-    
-    const heartbeatData = [];
-    
-    for (let i = 1; i <= 5; i++) {
-        heartbeatData.push({ 
-            service_id: i,
-            seconds_since_last: Math.floor(Math.random() * 30)
-        });
-    }
-    
-    const response = {
-        heartbeats: heartbeatData
-    };
-
-    console.log('Sending response:', response);
-    res.json(response);  // Send response object instead of heartbeatData
-});
-
 app.post('/api/heartbeat/:serviceId', (req, res) => {
     console.log('--------------------');
     console.log('Incoming heartbeat update at:', new Date().toISOString());
@@ -108,23 +83,24 @@ app.post('/api/heartbeat/:serviceId', (req, res) => {
     
     const serviceId = parseInt(req.params.serviceId);
     
-    // Validate service ID
-    if (isNaN(serviceId) || serviceId < 1 ) {
+    if (isNaN(serviceId) || serviceId < 1) {
         return res.status(400).json({ 
-            error: 'Invalid service ID. Must be positive' 
+            error: 'Invalid service ID. Must be a positive number.' 
         });
     }
 
     const now = new Date().toISOString();
-    const response = {
+    const heartbeat = {
         id: uuidv4(),
         service_id: serviceId,
         last_heartbeat: now,
         created_at: now
     };
 
-    console.log('Sending response:', response);
-    res.json(response);
+    heartbeats.set(serviceId, heartbeat);
+    console.log('Stored heartbeat:', heartbeat);
+    console.log('Current Map size:', heartbeats.size);
+    res.json(heartbeat);
 });
 
 
