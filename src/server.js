@@ -1,3 +1,4 @@
+const heartbeats = new Map();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -55,19 +56,24 @@ app.post('/api/transactions', (req, res) => {
 });
 
 // GET endpoint for transactions
-app.get('/api/transactions', (req, res) => {
+app.get('/api/heartbeatstatus', (req, res) => {
     console.log('--------------------');
     console.log('Incoming request at:', new Date().toISOString());
     console.log('Request headers:', req.headers);
     console.log('Client IP:', req.ip);
     console.log('Request URL:', req.originalUrl);
-
-    const sortedTransactions = [...transactions].sort(
-        (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
     
-    console.log('Sending response:', sortedTransactions);
-    res.json(sortedTransactions);
+    const heartbeatData = Array.from(heartbeats.values()).map(hb => ({
+        service_id: hb.service_id,
+        seconds_since_last: Math.floor((Date.now() - new Date(hb.last_heartbeat).getTime()) / 1000)
+    }));
+    
+    const response = {
+        heartbeats: heartbeatData
+    };
+
+    console.log('Sending response:', response);
+    res.json(response);
 });
 
 
@@ -103,9 +109,9 @@ app.post('/api/heartbeat/:serviceId', (req, res) => {
     const serviceId = parseInt(req.params.serviceId);
     
     // Validate service ID
-    if (isNaN(serviceId) || serviceId < 1 || serviceId > 10) {
+    if (isNaN(serviceId) || serviceId < 1 ) {
         return res.status(400).json({ 
-            error: 'Invalid service ID. Must be between 1 and 10.' 
+            error: 'Invalid service ID. Must be positive' 
         });
     }
 
